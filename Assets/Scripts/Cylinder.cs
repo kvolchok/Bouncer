@@ -1,10 +1,9 @@
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 
 public class Cylinder : GameEntity
 {
-    [FormerlySerializedAs("OnQuantityChanged")] public UnityEvent<Color, int> QuantityChangedEvent;
+    public UnityEvent<Color, int> QuantityChangedEvent;
 
     private void Start()
     {
