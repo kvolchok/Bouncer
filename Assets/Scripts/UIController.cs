@@ -8,19 +8,17 @@ public class UIController : MonoBehaviour
     [SerializeField]
     private Counter _cylinderCounterPrefab;
     [SerializeField]
-    private int _cylinderCountersNumber = 3;
-    [SerializeField]
     private Counter _cubeMovementCounterPrefab;
     
     private Counter _cubeMovementCounter;
 
-    public void CreateCylinderCounters(Spawner spawner, ColorsProvider colorsProvider)
+    public void CreateCylinderCounters(ColorsProvider colorsProvider)
     {
-        for (var i = 0; i < _cylinderCountersNumber; i++)
+        var colors = colorsProvider.GetAllColors();
+
+        foreach (var color in colors)
         {
-            var cylinderCounter = spawner.Spawn(colorsProvider, _cylinderCounterPrefab) as Counter;
-            cylinderCounter.transform.SetParent(transform);
-            var color = colorsProvider.GetColorByIndex(i);
+            var cylinderCounter = Instantiate(_cylinderCounterPrefab, transform);
             cylinderCounter.SetColor(color);
             _cylinderCounters.Add(cylinderCounter);
         }

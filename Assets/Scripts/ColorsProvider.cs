@@ -8,14 +8,14 @@ public class ColorsProvider
     [SerializeField]
     private Color[] _colors;
 
-    public Color GetColor()
+    public Color GetRandomColor()
     {
         var index = Random.Range(0, _colors.Length);
         return _colors[index];
     }
 
-    public Color GetColorByIndex(int index)
+    public Color[] GetAllColors()
     {
-        return _colors[index];
+        return _colors;
     }
 }

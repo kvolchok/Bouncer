@@ -15,7 +15,7 @@ public class Spawner : MonoBehaviour
         }
 
         SetRandomPosition(gameEntity);
-        var color = colorsProvider.GetColor();
+        var color = colorsProvider.GetRandomColor();
         gameEntity.SetColor(color);
 
         return gameEntity;

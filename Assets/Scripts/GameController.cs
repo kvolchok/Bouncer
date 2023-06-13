@@ -25,7 +25,7 @@ public class GameController : MonoBehaviour
 
     private void Awake()
     {
-        _uiController.CreateCylinderCounters(_spawner, _colorsProvider);
+        _uiController.CreateCylinderCounters(_colorsProvider);
         _uiController.CreateCubeMovementCounter();
         CreateGameEntity(_cylinderPrefab, _cylindersCount);
         CreateGameEntity(_spherePrefab);
