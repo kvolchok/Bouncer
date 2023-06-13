@@ -5,11 +5,11 @@ public class Spawner : MonoBehaviour
     [SerializeField]
     private int _randomRadius = 5;
 
-    public GameEntity Spawn(ColorsProvider colorsProvider, GameEntity prefab)
+    public T Spawn<T>(ColorsProvider colorsProvider, T prefab) where T : GameEntity 
     {
         var gameEntity = Instantiate(prefab, transform);
 
-        if (gameEntity is Cube or Counter)
+        if (gameEntity is Cube)
         {
             return gameEntity;
         }
@@ -28,6 +28,6 @@ public class Spawner : MonoBehaviour
 
         gameEntityPosition.x = randomPosition.x;
         gameEntityPosition.z = randomPosition.y;
-        gameEntity.transform.localPosition = gameEntityPosition;
+        gameEntity.transform.position = gameEntityPosition;
     }
 }
