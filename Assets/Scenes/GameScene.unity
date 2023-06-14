@@ -267,7 +267,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cylinderCounterPrefab: {fileID: -6368923593337516074, guid: 8a1e0d4b0d03c4e299326f98c1e74703, type: 3}
-  _cylinderCountersNumber: 3
   _cubeMovementCounterPrefab: {fileID: 5062252771101793053, guid: 0560890f2a69d42519571e28e89f47e8, type: 3}
 --- !u!1 &173841286
 GameObject:
@@ -410,7 +409,7 @@ Transform:
   m_GameObject: {fileID: 249031738}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -3, z: 0}
-  m_LocalScale: {x: 20, y: 1, z: 20}
+  m_LocalScale: {x: 30, y: 3, z: 30}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -739,12 +738,12 @@ MonoBehaviour:
   _cylindersCount: 6
   _spherePrefab: {fileID: -7151782063747000946, guid: 47c2d2e19ead64f78b8ae6e299b3ba9d, type: 3}
   _cubePrefab: {fileID: -7248193304273540077, guid: 41e92e0d57fc74bf8aa0dc55728afa7f, type: 3}
-  _spawner: {fileID: 255040596}
   _colorsProvider:
     _colors:
     - {r: 1, g: 0, b: 0, a: 0}
     - {r: 1, g: 1, b: 0, a: 0}
     - {r: 0, g: 1, b: 0, a: 0}
+  _spawner: {fileID: 255040596}
   _uiController: {fileID: 110196527}
 --- !u!4 &1521646696
 Transform:
