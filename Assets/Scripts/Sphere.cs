@@ -1,15 +1,20 @@
+using System;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class Sphere : GameEntity
 {
-    public UnityEvent SphereDestroyEvent;
+    private Action _sphereDestroyEvent;
+
+    public void Initialize(Action sphereDestroyEvent)
+    {
+        _sphereDestroyEvent = sphereDestroyEvent;
+    }
 
     private void OnTriggerEnter(Collider otherCollider)
     {
         if (otherCollider.CompareTag(GlobalConstants.CYLINDER_TAG))
         {
-            SphereDestroyEvent?.Invoke();
+            _sphereDestroyEvent?.Invoke();
             
             Destroy(gameObject);
             return;
@@ -19,7 +24,7 @@ public class Sphere : GameEntity
         {
             var cube = otherCollider.gameObject.GetComponent<Cube>();
             cube.SetColor(Color);
-            SphereDestroyEvent?.Invoke();
+            _sphereDestroyEvent?.Invoke();
 
             Destroy(gameObject);
         }

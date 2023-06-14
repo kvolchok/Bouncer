@@ -1,13 +1,15 @@
+using System;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class Cylinder : GameEntity
 {
-    public UnityEvent<Color, int> QuantityChangedEvent;
+    private Action<Color, int> _quantityChangedEvent;
 
-    private void Start()
+    public void Initialize(Action<Color, int> quantityChangedEvent)
     {
-        QuantityChangedEvent?.Invoke(Color, 1);
+        _quantityChangedEvent = quantityChangedEvent;
+        
+        _quantityChangedEvent?.Invoke(Color, 1);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -20,7 +22,7 @@ public class Cylinder : GameEntity
         var cube = collision.gameObject.GetComponent<Cube>();
         if (cube.Color == Color)
         {
-            QuantityChangedEvent?.Invoke(Color, -1);
+            _quantityChangedEvent?.Invoke(Color, -1);
 
             Destroy(gameObject);
         }

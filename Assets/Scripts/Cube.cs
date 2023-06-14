@@ -1,19 +1,21 @@
+using System;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class Cube : GameEntity
 {
-    public UnityEvent OutOfMapEvent;
-    public UnityEvent<int> CubePushedEvent;
-    
     [SerializeField]
     private float _forceMultiplier = 5;
     
+    private Action<Cube> _outOfMapEvent;
+    private Action<int> _cubePushedEvent;
     private Rigidbody _rigidbody;
     private Camera _camera;
 
-    private void Start()
+    public void Initialize(Action<Cube> outOfMapEvent, Action<int> cubePushedEvent)
     {
+        _outOfMapEvent = outOfMapEvent;
+        _cubePushedEvent = cubePushedEvent;
+        
         _rigidbody = GetComponent<Rigidbody>();
         _camera = Camera.main;
     }
@@ -30,7 +32,7 @@ public class Cube : GameEntity
 
         if (Input.GetMouseButtonDown(0))
         {
-            Push(hitInfo.point);
+            PushCubeTo(hitInfo.point);
         }
     }
 
@@ -38,17 +40,17 @@ public class Cube : GameEntity
     {
         if (otherCollider.CompareTag(GlobalConstants.OUT_OF_MAP_TAG))
         {
-            OutOfMapEvent?.Invoke();
+            _outOfMapEvent?.Invoke(this);
 
             Destroy(gameObject);
         }
     }
     
-    private void Push(Vector3 point)
+    private void PushCubeTo(Vector3 point)
     {
         var force = (point - _rigidbody.position) * _forceMultiplier;
         _rigidbody.AddForce(force);
         
-        CubePushedEvent?.Invoke(1);
+        _cubePushedEvent?.Invoke(1);
     }
 }
