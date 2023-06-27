@@ -34,19 +34,17 @@ public class GameController : MonoBehaviour
         {
             var gameEntity = _spawner.Spawn(_colorsProvider, prefab);
 
-            if (gameEntity is Cylinder cylinder)
+            switch (gameEntity)
             {
-                cylinder.Initialize(_uiController.ChangeCylinderCount);
-            }
-        
-            if (gameEntity is Sphere sphere)
-            {
-                sphere.Initialize(() => CreateGameEntity(_spherePrefab));
-            }
-
-            if (gameEntity is Cube cube)
-            {
-                cube.Initialize(OnCubeMoveOutOfMap, _uiController.ChangeCubeMovementCount);
+                case Cylinder cylinder:
+                    cylinder.Initialize(_uiController.ChangeCylinderCount);
+                    break;
+                case Sphere sphere:
+                    sphere.Initialize(() => CreateGameEntity(_spherePrefab));
+                    break;
+                case Cube cube:
+                    cube.Initialize(OnCubeMoveOutOfMap, _uiController.ChangeCubeMovementCount);
+                    break;
             }
         }
     }
