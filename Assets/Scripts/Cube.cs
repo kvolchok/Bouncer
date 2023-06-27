@@ -6,15 +6,15 @@ public class Cube : GameEntity
     [SerializeField]
     private float _forceMultiplier = 5;
     
-    private Action<Cube> _outOfMapEvent;
-    private Action<int> _cubePushedEvent;
+    private Action<Cube> _onCubeMoveOutOfMap;
+    private Action<int> _onCubePushed;
     private Rigidbody _rigidbody;
     private Camera _camera;
 
-    public void Initialize(Action<Cube> outOfMapEvent, Action<int> cubePushedEvent)
+    public void Initialize(Action<Cube> onCubeMoveOutOfMap, Action<int> onCubePushed)
     {
-        _outOfMapEvent = outOfMapEvent;
-        _cubePushedEvent = cubePushedEvent;
+        _onCubeMoveOutOfMap = onCubeMoveOutOfMap;
+        _onCubePushed = onCubePushed;
         
         _rigidbody = GetComponent<Rigidbody>();
         _camera = Camera.main;
@@ -40,7 +40,7 @@ public class Cube : GameEntity
     {
         if (otherCollider.CompareTag(GlobalConstants.OUT_OF_MAP_TAG))
         {
-            _outOfMapEvent?.Invoke(this);
+            _onCubeMoveOutOfMap?.Invoke(this);
 
             Destroy(gameObject);
         }
@@ -51,6 +51,6 @@ public class Cube : GameEntity
         var force = (point - _rigidbody.position) * _forceMultiplier;
         _rigidbody.AddForce(force);
         
-        _cubePushedEvent?.Invoke(1);
+        _onCubePushed?.Invoke(1);
     }
 }

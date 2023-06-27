@@ -3,18 +3,18 @@ using UnityEngine;
 
 public class Sphere : GameEntity
 {
-    private Action _sphereDestroyEvent;
+    private Action _onSphereDestroy;
 
-    public void Initialize(Action sphereDestroyEvent)
+    public void Initialize(Action onSphereDestroy)
     {
-        _sphereDestroyEvent = sphereDestroyEvent;
+        _onSphereDestroy = onSphereDestroy;
     }
 
     private void OnTriggerEnter(Collider otherCollider)
     {
         if (otherCollider.CompareTag(GlobalConstants.CYLINDER_TAG))
         {
-            _sphereDestroyEvent?.Invoke();
+            _onSphereDestroy?.Invoke();
             
             Destroy(gameObject);
             return;
@@ -24,7 +24,7 @@ public class Sphere : GameEntity
         {
             var cube = otherCollider.gameObject.GetComponent<Cube>();
             cube.SetColor(Color);
-            _sphereDestroyEvent?.Invoke();
+            _onSphereDestroy?.Invoke();
 
             Destroy(gameObject);
         }
